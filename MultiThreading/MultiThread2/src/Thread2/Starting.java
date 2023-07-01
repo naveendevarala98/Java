@@ -39,19 +39,51 @@ public class Starting {
 		},"Poper").start();*/
 		
 		//join
-		Thread thread = new Thread(()-> {
-			System.out.println("Threaf join");	
-		},"OurThread");
+		/*
+		 * Thread thread = new Thread(()-> { System.out.println("Threaf join");
+		 * },"OurThread");
+		 * 
+		 * thread.start();
+		 * 
+		 * try { thread.join(); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 * System.out.print("main thread join");
+		 */
 		
-		thread.start();
+		//Deadlock - locks are reverse in two thread
+		//solution - not to go in deadlock keep the lock order same lock1->lock2 or lock2->lock1 in all bloc
+		String lock1="nav";
+		String lock2="bab";
+		Thread thread1 = new Thread(()->{
+			synchronized(lock1) {
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				synchronized(lock2) {
+					System.out.println("lock acquired");
+				}
+			}
+		},"Thread1");
 		
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.print("main thread join");
+		Thread thread2 = new Thread(()->{
+			synchronized(lock2) {
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				synchronized(lock1) {
+					System.out.println("lock acquired");
+				}
+			}
+		},"Thread1");
+		
+		thread1.start();
+		thread2.start();
 	}
 		
 		
