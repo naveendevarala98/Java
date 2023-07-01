@@ -19,7 +19,9 @@ public class Starting {
 		
 		System.out.println("Main thread executed");
 		
-		Stack a =new Stack(5);
+		
+		//Synchronization concept - pusher and poper
+	/*	Stack a =new Stack(5);
 		
 		new Thread(()->{
 			int counter =0;
@@ -34,7 +36,24 @@ public class Starting {
 				System.out.println("poped :"+a.pop());
 			}
 			
-		},"Poper").start();
+		},"Poper").start();*/
+		
+		//join
+		Thread thread = new Thread(()-> {
+			System.out.println("Threaf join");	
+		},"OurThread");
+		
+		thread.start();
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.print("main thread join");
 	}
+		
+		
 
 }
