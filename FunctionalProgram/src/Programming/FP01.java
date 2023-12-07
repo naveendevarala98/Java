@@ -13,7 +13,21 @@ public class FP01 {
         v.add(6);
 
       //  printNumberStructure(v);
-        printEvenNumber(v);
+      //  printEvenNumber(v);
+      //  oddNumber(v);
+        List<String> s = new ArrayList<>();
+        s.add("spring");
+        s.add("spring api");
+        s.add("aws");
+
+        //printWordInd(s);
+      //  printWordSpring(s);
+
+
+        //map
+        //printSquareOfEven(v);
+        printNoOfChar(s);
+
     }
 
     private static void print(int n){
@@ -57,4 +71,46 @@ public class FP01 {
 //            }
 //        }
     }
+
+    //print only odd number
+    private static void oddNumber(List<Integer> v){
+
+        v.stream().filter(odd->(odd%2==1)).forEach(System.out::println);
+    }
+
+    //print word individually
+    private static  void  printWordInd(List<String> s){
+        s.stream().forEach(System.out::println);
+        //s.forEach(System.out::println);
+    }
+
+    //prind word containing spring
+    private  static void  printWordSpring(List<String> s){
+        s.stream().filter(a->a.contains("spring")).forEach(System.out::println);
+        s.stream().filter(a->a.length()>4).forEach(System.out::println);
+    }
+
+    //2. MAP - take that value do any operation on that print
+    private  static  void printSquareOfEven(List<Integer> v){
+        v.stream().filter(c->c%2==0)
+                .map(number->number*number) //map
+                .forEach(System.out::println);
+
+        //print cube of odd
+        v.stream().filter(c->c%2!=0)
+                .map(number -> number*number*number) //it maps to that number for further validation
+                .forEach(System.out::println);
+    }
+
+
+    private static void printNoOfChar(List<String> s){
+        s.stream().map(c->c+" "+c.length())
+                .forEach(System.out::println);
+    }
+
+
+
+
+
+
 }
